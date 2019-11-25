@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mybatis-generator的核心配置文件 -->
+<generatorConfiguration>
+
+  <!--<classPathEntry location="D:\gg\repository\mysql\mysql-connector-java\8.0.16\mysql-connector-java-8.0.16.jar" />-->
+  <classPathEntry location="D:\maven_repo\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar" />
+<!--   <classPathEntry location="D:\maven_repo\repository\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar" /> -->
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://127.0.0.1:3306/cmsjd1911"
+        userId="briup"
+        password="briupks123">
+      <!--产生selectByPrimaryKey-->
+      <property name="useInformationSchema" value="true" />
+    </jdbcConnection>
+
+
+	<!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!--自动生成的实体的存放包路径 -->
+    <javaModelGenerator targetPackage="com.briup.bean" targetProject="./src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!--自动生成的*Mapper.xml文件存放路径 -->
+    <sqlMapGenerator targetPackage="mapper"  targetProject="./src/main/resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!--自动生成的*Mapper.java存放路径 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.briup.dao"  targetProject="./src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+
+	<!-- 映射配置 -->
+    <!---->
+    <table tableName="base_privilege" domainObjectName="Privilege" ></table>
+    <table tableName="base_role" domainObjectName="Role" ></table>
+    <table tableName="base_role_privilege" domainObjectName="RolePrivilege" ></table>
+    <table tableName="base_user" domainObjectName="User" ></table>
+    <table tableName="base_user_role" domainObjectName="UserRole" ></table>
+    <table tableName="cms_article" domainObjectName="Article" >
+    	<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR"></columnOverride>
+    	<columnOverride column="source" javaType="java.lang.String" jdbcType="VARCHAR"></columnOverride>
+    </table>
+    <table tableName="cms_category" domainObjectName="Category" ></table>
+    <table tableName="cms_comment" domainObjectName="Comment" ></table>
+    <table tableName="test" domainObjectName="Test" ></table>
+
+	<!--
+	 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+	-->
+
+
+
+  </context>
+</generatorConfiguration>

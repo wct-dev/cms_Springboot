@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.dao.extend.UserExtendMapper">
+  <select id="selectById" resultMap="UserExtendResultMap">
+    SELECT *
+    FROM base_user
+    WHERE id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="UserExtendResultMap">
+    SELECT *
+    FROM base_user
+  </select>
+
+  <resultMap
+          id="UserExtendResultMap"
+          type="com.briup.bean.extend.UserExtend"
+          extends="com.briup.dao.UserMapper.BaseResultMap">
+
+    <collection property="roles" column="id" select="com.briup.dao.extend.RoleExtendMapper.selectByUserId" ></collection>
+  </resultMap>
+
+</mapper>
